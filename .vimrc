@@ -58,6 +58,8 @@ set ruler
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set cursorline
+set cursorcolumn
 set nu
 set hls
 set cindent
