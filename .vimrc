@@ -54,8 +54,6 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 syntax on
-set ruler
-set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set cursorline
@@ -65,8 +63,6 @@ set hls
 set cindent
 set autoindent
 set expandtab
-set list
-set listchars=tab:>-     " > is shown at the beginning, - throughout
 "set noexpandtab
 
 map ,* *<C-O>:%s///gn<CR>
@@ -116,7 +112,6 @@ filetype indent on
 "let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 "set t_Co=256
 "colorscheme gruvbox
-"set background=dark
 
 "let g:solarized_termcolors=256
 "syntax enable
@@ -129,6 +124,8 @@ filetype indent on
 
 execute pathogen#infect()
 colorscheme monokai
+colorscheme gruvbox 
+set background=dark
 "au BufNewFile,BufRead *.cpp setlocal ft=cpp14
 au BufNewFile,BufRead *.pde setlocal ft=arduino
 au BufNewFile,BufRead *.ino setlocal ft=arduino
@@ -139,10 +136,11 @@ au BufNewFile,BufRead *.launch set filetype=xml
 set cinoptions=l1
 set nowrap
 
+set tags=.tags
 set encoding=utf-8
 set fileencoding=utf-8
 
-" Highlight TODO and FIXME.
+" Highlight 
 augroup HiglightTODO
   autocmd!
   autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME\|DEBUG\|HACK\|HACK_BEGIN\|HACK_END\|HACK_NOTE', 10)
@@ -157,10 +155,8 @@ autocmd BufReadPre,FileReadPre * :IndentGuidesEnable
 
 set synmaxcol=200
 
-nnoremap <C-w>o :mksession! ~/.vim_session<CR>:wincmd o<CR>
 nnoremap <C-w>u :source ~/.vim_session<CR>
-nnoremap \ i#include <iostream><CR>#include <cstdlib><CR>#include <string><CR>#include <vector><CR>using namespace std;<CR><CR>int main() {<CR><CR>return 0<CR>}<UP><ESC>O
-
+nnoremap <C-w>s :mksession! ~/.vim_session<CR>
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -178,4 +174,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-
+" Add cuda syntx to .cu and .cuh "
+au BufNewFile,BufRead *.cu set ft=cuda
+au BufNewFile,BufRead *.cuh set ft=cuda
+let g:syntastic_python_checkers=['mypy']
